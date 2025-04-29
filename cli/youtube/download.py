@@ -1,7 +1,14 @@
+"""File for the handling of youtube download action"""
+
 import argparse
 
 
 def download_video(subparser: argparse._SubParsersAction):
+    """Build a parser for the download action of youtube
+
+    Args:
+        subparser (argparse._SubParsersAction): Subparser on which download parser has to be built
+    """
     downloader: argparse.ArgumentParser = subparser.add_parser(
         "download", help="Download a video from a youtube link"
     )

@@ -7,9 +7,9 @@ import typing
 
 app = FastAPI()
 
-@app.get("/")
+@app.get("/ping" , status_code=200)
 def root():
-    return {"home" : "page"}
+    return JSONResponse(status_code=200 , content= "App is ready to use")
 
 @app.post("/youtube/download" , status_code=200)
 def yt_download(params : dict[str , typing.Any]):

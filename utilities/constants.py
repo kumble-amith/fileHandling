@@ -1,0 +1,1 @@
+PARSERS_WITHOUT_ARGS = ('ping')
