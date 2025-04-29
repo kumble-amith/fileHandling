@@ -23,7 +23,7 @@ def download_video(subparser: argparse._SubParsersAction):
         "-f",
         "--format",
         help="Format of the video",
-        choices=['mp3' , 'mp4'],
+        choices=["mp3", "mp4"],
         default="mp4",
         required=False,
     )
@@ -34,5 +34,8 @@ def download_video(subparser: argparse._SubParsersAction):
         default="./",
         required=False,
     )
+    downloader.add_argument(
+        "--debug", action="store_true", help="Debug Level Logginf information"
+    )
 
-    downloader.set_defaults(request_type='post')
+    downloader.set_defaults(request_type="post")

@@ -1,21 +1,50 @@
-import sys
+"""Overall HTTP Utils File"""
 
+import sys
 import typing
 
-BASE_URL = "http://127.0.0.1:8000/"
+from utilities import logger
+from utilities.utils import get_configurator
+
+
+def get_base_url() -> str:
+    """ Reads the configuration file (configs.ini) and then returns the base url for the request 
+
+    Returns:
+        str: Base URL for the request
+    """
+    configs = get_configurator()
+    base_url = configs["URLS"]["BASE_URL"]
+    logger.debug("Base Url from configs in %s ", base_url)
+    return base_url
 
 
 def prepare_url(payload: dict[str, typing.Any]):
+    """Prepares the base URL for any kind of request That needs to be sent
 
-    base_url = ""
-    if payload["action"]:
-        base_url += payload["action"] + "/"
+    Args:
+        payload (dict[str ,  typing.Any]): The data that needs to be sent to the server
 
-    if payload["sub_action"]:
-        base_url += payload["sub_action"] + "/"
+    Returns:
+        str: The Url on which the request has to be sent
+    """
 
-    if not base_url:
-        print("Unable to create a end point")
+    endpoint = ""
+    logger.debug("Preparing the url for get request")
+
+    if payload.get("action"):
+        endpoint += payload.get("action") + "/"
+
+    if payload.get("sub_action"):
+        endpoint += payload.get("sub_action") + "/"
+
+    if not endpoint:
+        logger.error("Unable to create a end point with the details provided")
         sys.exit(1)
 
-    return BASE_URL + base_url
+    base_url = get_base_url()
+
+    url = base_url + endpoint
+
+    logger.debug("The Request URL is %s ", url)
+    return url

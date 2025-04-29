@@ -1,41 +1,81 @@
-import typing
+"""File responsible for the actual trigger of the request and related error handling"""
+
 import sys
+import typing
 
 import requests
 
+from utilities import logger
 
-def get_request(payload: dict[str, typing.Any], url: str):
 
+def get_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
+    """Sends a Get request based on the provided url and payload
+        Checks for the following error
+            1 requests.exceptions.ConnectionError , requests.exceptions.MissingSchema
+                This indicates that the url provided is wrong and hence exiting form the cli page
+            2 requests.exceptions.HTTPError
+                This indicates that a successful http request was fired but getting a invalid response status code
+                Hence reporting all the error to the user as the error is in the payload
+
+    Args:
+        payload (dict[str, typing.Any]): Data to be sent
+        url (str): Destination url
+
+    Returns:
+        requests.Response: Response from the server
+    """
     try:
-        response = requests.get(url=url, params=payload, timeout=60)
+        response = requests.get(url=url, params=payload, timeout=20)
         response.raise_for_status()
 
-    except Exception as e:
-
-        print(f"Unexpected resonse recieved {e}")
-        print(response.status_code)
-        print(response.text)
+    except (
+        requests.exceptions.ConnectionError,
+        requests.exceptions.MissingSchema,
+    ) as e:
+        logger("Error received: %s ", e)
+        logger.error(
+            "Invalid URL %s. Exiting !! \nPlease contact the administrator", url
+        )
         sys.exit()
 
+    except requests.exceptions.HTTPError as e:
+        logger("Error received: %s ", e)
+        logger.error("Invalid response status code received %s ", response.status_code)
     return response
 
 
-def post_request(payload: dict[str, typing.Any], url: str):
+def post_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
+    """Sends a Post request based on the provided url and payload
+        Checks for the following error
+            1 requests.exceptions.ConnectionError , requests.exceptions.MissingSchema
+                This indicates that the url provided is wrong and hence exiting form the cli page
+            2 requests.exceptions.HTTPError
+                This indicates that a successful http request was fired but getting a invalid response status code
+                Hence reporting all the error to the user as the error is in the payload
 
-    print("Sending Post Request ")
-    print(f"URL : {url}")
-    print(f"Payload : {payload}" )
+    Args:
+        payload (dict[str, typing.Any]): Data to be sent
+        url (str): Destination url
+
+    Returns:
+        requests.Response: Response from the server
+    """
     try:
-        response = requests.post(url=url, json=payload, timeout=60)
-
+        response = requests.post(url=url, json=payload, timeout=20)
         response.raise_for_status()
 
-    except Exception as e:
-
-        # print(f"Unexpected resonse recieved {e}")
-        # print(response.status_code)
-        # print(response.text)
-        print("Hello world ")
+    except (
+        requests.exceptions.ConnectionError,
+        requests.exceptions.MissingSchema,
+    ) as e:
+        logger("Error received: %s ", e)
+        logger.error(
+            "Invalid URL %s. Exiting !! \nPlease contact the administrator", url
+        )
         sys.exit()
+
+    except requests.exceptions.HTTPError as e:
+        logger("Error received: %s ", e)
+        logger.error("Invalid response status code received %s ", response.status_code)
 
     return response

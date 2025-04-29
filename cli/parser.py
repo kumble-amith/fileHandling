@@ -5,8 +5,6 @@ import typing
 from cli.youtube.youtube_cli import handle_yt_cli
 
 
-import certifi
-# certifi.contents()
 def create_parser() -> argparse.ArgumentParser:
 
     parser = argparse.ArgumentParser()
@@ -14,7 +12,6 @@ def create_parser() -> argparse.ArgumentParser:
         sys.argv.append('-h')
 
     subparser = parser.add_subparsers(dest="action")
-
     handle_yt_cli(subparser)
     return parser
 
