@@ -25,7 +25,7 @@ def get_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         requests.Response: Response from the server
     """
     try:
-        response = requests.get(url=url, params=payload, timeout=20)
+        response = requests.get(url=url, params=payload, timeout=120)
         response.raise_for_status()
 
     except (
@@ -38,6 +38,11 @@ def get_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         )
         sys.exit()
 
+    except requests.exceptions.ReadTimeout:
+        logger.info(
+            "Request Taking longer to execute than expected. Please contact the administrator"
+        )
+        
     except requests.exceptions.HTTPError as e:
         logger("Error received: %s ", e)
         logger.error("Invalid response status code received %s ", response.status_code)
@@ -61,7 +66,7 @@ def post_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         requests.Response: Response from the server
     """
     try:
-        response = requests.post(url=url, json=payload, timeout=20)
+        response = requests.post(url=url, json=payload, timeout=120)
         response.raise_for_status()
 
     except (
@@ -74,6 +79,10 @@ def post_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         )
         sys.exit()
 
+    except requests.exceptions.ReadTimeout:
+        logger.info(
+            "Request Taking longer to execute than expected. Please contact the administrator"
+        )
     except requests.exceptions.HTTPError as e:
         logger("Error received: %s ", e)
         logger.error("Invalid response status code received %s ", response.status_code)

@@ -42,8 +42,9 @@ def prepare_url(payload: dict[str, typing.Any]):
         logger.error("Unable to create a end point with the details provided")
         sys.exit(1)
 
+    
     base_url = get_base_url()
-
+    
     url = base_url + endpoint
 
     logger.debug("The Request URL is %s ", url)

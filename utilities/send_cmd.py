@@ -1,4 +1,4 @@
-"""File responsible for the seding and recieveing of the http requests"""
+"""File responsible for the sending and receiving of the http requests"""
 
 import sys
 import typing
@@ -36,7 +36,7 @@ def send_cmd(payload: dict[str, typing.Any]) -> requests.Response:
 
         case _:
             logger.error(
-                "Getting a invalid request type %s. Exitting !!!",
+                "Getting a invalid request type %s. Exiting !!!",
                 payload["request_type"],
             )
             sys.exit(1)
