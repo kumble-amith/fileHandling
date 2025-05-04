@@ -1,4 +1,4 @@
-"""Overall Handling fucntion"""
+"""Overall Handling function"""
 
 import logging
 

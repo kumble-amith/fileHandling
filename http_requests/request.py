@@ -32,7 +32,7 @@ def get_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         requests.exceptions.ConnectionError,
         requests.exceptions.MissingSchema,
     ) as e:
-        logger("Error received: %s ", e)
+        logger.error("Error received: %s ", e)
         logger.error(
             "Invalid URL %s. Exiting !! \nPlease contact the administrator", url
         )
@@ -44,7 +44,7 @@ def get_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         )
         
     except requests.exceptions.HTTPError as e:
-        logger("Error received: %s ", e)
+        logger.error("Error received: %s ", e)
         logger.error("Invalid response status code received %s ", response.status_code)
     return response
 
@@ -84,7 +84,7 @@ def post_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
             "Request Taking longer to execute than expected. Please contact the administrator"
         )
     except requests.exceptions.HTTPError as e:
-        logger("Error received: %s ", e)
+        logger.error("Error received: %s ", e)
         logger.error("Invalid response status code received %s ", response.status_code)
 
     return response

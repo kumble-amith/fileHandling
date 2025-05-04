@@ -1,1 +1,3 @@
-PARSERS_WITHOUT_ARGS = ('ping')
+"""Constants required for overall project"""
+
+PARSERS_WITHOUT_ARGS = "ping"
