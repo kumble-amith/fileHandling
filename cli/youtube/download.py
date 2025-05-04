@@ -42,7 +42,7 @@ def download_video(subparser: argparse._SubParsersAction):
         required=False,
     )
     downloader.add_argument(
-        "--debug", action="store_true", help="Debug Level Logginf information"
+        "--debug", action="store_true", help="Debug Level Logging information"
     )
 
     downloader.set_defaults(request_type="post")

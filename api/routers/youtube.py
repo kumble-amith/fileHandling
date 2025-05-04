@@ -1,3 +1,4 @@
+"""Youtube related server activities and routes"""
 import typing
 
 from fastapi import APIRouter
@@ -9,7 +10,7 @@ router = APIRouter()
 
 @router.post("/download", status_code=200)
 def yt_download(params: dict[str, typing.Any]):
-    print(params)
+    """Download the video from youtube"""
 
     download(params["link"])
 
