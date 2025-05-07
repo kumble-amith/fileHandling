@@ -16,7 +16,6 @@ def download_video(subparser: argparse._SubParsersAction):
     downloader.add_argument(
         "-l",
         "--link",
-        nargs="+",
         help="List of Youtube Links to download",
         required=True,
     )
