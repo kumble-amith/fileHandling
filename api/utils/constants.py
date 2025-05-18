@@ -14,3 +14,5 @@ YDL_OPTIONS = {
     },
     "mp4": {"format": "mp4"},
 }
+
+SPLIT_ALLOWED_FILE_TYPES = ("mp3",)

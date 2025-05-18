@@ -4,7 +4,7 @@ import typing
 
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
-from utils.youtube import download
+from utils.youtube.download import download
 
 router = APIRouter()
 

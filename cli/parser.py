@@ -6,6 +6,7 @@ import typing
 
 from cli.ping.ping_server import build_ping_parser
 from cli.youtube.youtube_cli import handle_yt_cli
+from cli.split_files.split import build_split_parser
 from utilities.constants import PARSERS_WITHOUT_ARGS
 
 
@@ -23,6 +24,7 @@ def create_parser() -> argparse.ArgumentParser:
     subparser = parser.add_subparsers(dest="action")
     handle_yt_cli(subparser=subparser)
     build_ping_parser(subparser=subparser)
+    build_split_parser(subparser=subparser)
     return parser
 
 
