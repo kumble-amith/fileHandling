@@ -36,7 +36,6 @@ def send_cmd(payload: dict[str, typing.Any]) -> requests.Response:
 
         case _:
             logger.error(
-                "Getting a invalid request type %s. Exiting !!!",
-                payload["request_type"],
+                f"Getting a invalid request type {payload['request_type']}. Exiting !!!"
             )
             sys.exit(1)

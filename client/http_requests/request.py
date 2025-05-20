@@ -32,9 +32,9 @@ def get_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         requests.exceptions.ConnectionError,
         requests.exceptions.MissingSchema,
     ) as e:
-        logger.error("Error received: %s ", e)
+        logger.error(f"Error received: {e} ")
         logger.error(
-            "Invalid URL %s. Exiting !! \nPlease contact the administrator", url
+            f"Invalid URL {url}. Exiting !! \nPlease contact the administrator"
         )
         sys.exit()
 
@@ -42,10 +42,10 @@ def get_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         logger.info(
             "Request Taking longer to execute than expected. Please contact the administrator"
         )
-        
+
     except requests.exceptions.HTTPError as e:
-        logger.error("Error received: %s ", e)
-        logger.error("Invalid response status code received %s ", response.status_code)
+        logger.error(f"Error received: {e} ")
+        logger.error(f"Invalid response status code received {response.status_code} ")
     return response
 
 
@@ -73,9 +73,9 @@ def post_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
         requests.exceptions.ConnectionError,
         requests.exceptions.MissingSchema,
     ) as e:
-        logger("Error received: %s ", e)
+        logger.error(f"Error received: {e} ")
         logger.error(
-            "Invalid URL %s. Exiting !! \nPlease contact the administrator", url
+            f"Invalid URL {url}. Exiting !! \nPlease contact the administrator"
         )
         sys.exit()
 
@@ -84,7 +84,7 @@ def post_request(payload: dict[str, typing.Any], url: str) -> requests.Response:
             "Request Taking longer to execute than expected. Please contact the administrator"
         )
     except requests.exceptions.HTTPError as e:
-        logger.error("Error received: %s ", e)
-        logger.error("Invalid response status code received %s ", response.status_code)
+        logger.error(f"Error received: {e} ")
+        logger.error(f"Invalid response status code received {response.status_code} ")
 
     return response

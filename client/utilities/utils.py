@@ -19,7 +19,7 @@ def get_configurator() -> configparser.ConfigParser:
 
     configs_path = f"{current_dir}/../configurations/configs.ini"
 
-    logger.debug("Reading the configs from the path %s ", configs_path)
+    logger.debug(f"Reading the configs from the path {configs_path} ")
 
     config.read(configs_path)
 

@@ -15,7 +15,7 @@ def get_base_url() -> str:
     """
     configs = get_configurator()
     base_url = configs["URLS"]["BASE_URL"]
-    logger.debug("Base Url from configs in %s ", base_url)
+    logger.debug(f"Base Url from configs in {base_url} ")
     return base_url
 
 
@@ -47,5 +47,5 @@ def prepare_url(payload: dict[str, typing.Any]):
     
     url = base_url + endpoint
 
-    logger.debug("The Request URL is %s ", url)
+    logger.debug(f"The Request URL is {url} ")
     return url

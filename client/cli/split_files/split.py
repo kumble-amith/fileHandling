@@ -21,4 +21,7 @@ def build_split_parser(subparser: argparse._SubParsersAction):
         help="The parts of the file required in the form of `from.to` ",
         nargs="+",
     )
+    split_parser.add_argument(
+        "--debug", action="store_true", help="Run the command in debug mode "
+    )
     split_parser.set_defaults(request_type="post")

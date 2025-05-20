@@ -1,6 +1,6 @@
 """Overall Handling function"""
 
-import logging
+import sys
 
 from cli.parser import handle_parser
 from utilities import logger
@@ -12,10 +12,12 @@ def main() -> None:
     args = handle_parser()
 
     if args.get("debug", False):
-        logger.setLevel(logging.DEBUG)
+        logger.add(sys.stdout , level="DEBUG")
+    else:
+        logger.add(sys.stdout, level="INFO")
 
     logger.info("Received the Arguments from CLI")
-    logger.debug("Arguments %s ", args)
+    logger.debug(f"Arguments {args} ")
 
     response = send_cmd(payload=args)
     print(response.json())
